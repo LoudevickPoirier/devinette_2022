@@ -21,34 +21,34 @@ def main():
     """
     reponse = ""
 
-    while reponse is not "nombreRandom":
+    while reponse != "nombreRandom":
         compteur = 1
         print(ROUGE + 'LP' + BLANC + ':' + CYAN + ' Jeu de devinette...')
         print(ROUGE + 'LP' + BLANC + ':' + CYAN + ' Devinez le nombre entier entre 1 et 100 \n')
         nombrerandom = nbrandom()
         listereponse = []
-        reponse = ""
         succes = False
         rejouer = False
 
-        while compteur < 11 or succes is not True or rejouer is True:
+        while compteur < 11 or succes is not False or rejouer is True:
+            if compteur == 11:
+                break
             reponse = input(BLANC + 'Essai ' + GREEN + str(compteur) + BLANC + ': ')
-            if reponse is "GGG":
+            if reponse == "GGG":
                 succes = True
                 listereponse.append(reponse)
                 break
-            if reponse is "PPP":
+            if reponse == "PPP":
                 listereponse.append(reponse)
                 break
 
-            # noinspection PyPep8
             if re.match("^\s*\S*[0-9 -]+$", reponse):
                 reponse = int(reponse)
-                if reponse is not nombrerandom:
+                if reponse != nombrerandom:
                     if reponse in listereponse:
                         print(
-                            ROUGE + 'LP' + BLANC + '>>>' + CYAN + ' Ce nombre a déjà été essayé:' + GREEN + str(
-                                listereponse) + '\n')
+                            ROUGE + 'LP' + BLANC + '>>>' + CYAN
+                            + ' Ce nombre a déjà été essayé:' + GREEN + str(listereponse) + '\n')
                     else:
                         compteur += 1
                         listereponse.append(reponse)
@@ -66,11 +66,14 @@ def main():
                     break
             else:
                 print(
-                    ROUGE + 'LP' + BLANC + ' >>>' + ROUGE + ' ERREUR: Entrez un nombre entier svp!\n')
+                    ROUGE + 'LP' + BLANC + ' >>>' +
+                    ROUGE + ' ERREUR: Entrez un nombre entier svp!\n')
 
         if succes:
-            print(ROUGE + 'LP' + BLANC + ' >' + GREEN + ' Bravo, vous avez deviné le nombre! ')
-            print(ROUGE + 'LP' + BLANC + ' >' + BLANC + ' Vos essai:  ' + BLUE + str(listereponse) + '\n')
+            print(ROUGE + 'LP' + BLANC + ' >'
+                  + GREEN + ' Bravo, vous avez deviné le nombre! ')
+            print(ROUGE + 'LP' + BLANC
+                  + ' >' + BLANC + ' Vos essai:  ' + BLUE + str(listereponse) + '\n')
         else:
             print(
                 ROUGE + 'LP' + BLANC + ' >'
